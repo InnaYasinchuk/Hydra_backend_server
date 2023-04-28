@@ -9,11 +9,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(cors({
-  origin: 'https://hydra-vr-virtual-reality.netlify.app'
+  origin: '*'
 }));
 
 app.post('/send-email', async (req, res) => {
-  res.header("Access-Control-Allow-Origin", "https://hydra-vr-virtual-reality.netlify.app");
+  res.header("Access-Control-Allow-Origin", '*');
   res.header("Access-Control-Allow-Methods", "POST");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   
