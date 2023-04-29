@@ -1,8 +1,0 @@
-[build]
-  command = "node index.js"
-  
-
-[[redirects]]
-  from = "/send-email"
-  to = "/.netlify/functions/send-email"
-  status = 200

@@ -1,8 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
-
 const app = express();
+// const port = process.env.PORT || 80;
+
+const dotenv = require('dotenv');
+dotenv.config();
 
 
 app.use(express.json());
@@ -13,9 +16,9 @@ app.use(cors({
 }));
 
 app.post('/send-email', async (req, res) => {
-  res.header("Access-Control-Allow-Origin", '*');
-  res.header("Access-Control-Allow-Methods", "POST");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
+  // res.header("Access-Control-Allow-Origin", '*');
+  // res.header("Access-Control-Allow-Methods", "POST");
+  // res.header("Access-Control-Allow-Headers", "Content-Type");
   
 
   const { firstName, lastName, email, phone, subject, about } = req.body;
@@ -25,14 +28,14 @@ app.post('/send-email', async (req, res) => {
     port: 587,
     secure: false,
     auth: {
-      user: 'innatestit@gmail.com',
-      pass: 'keaxplpytauyealv',
+      user: process.env.EMAIL_ADDRESS,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 
   let info = await transporter.sendMail({
     from: `"${firstName} ${lastName}" <${email}>`,
-    to: 'innatestit@gmail.com',
+    to: process.env.EMAIL_ADDRESS,
     subject: subject,
     html: `<b>Name:</b> ${firstName} ${lastName}<br/><b>Email:</b> ${email}<br/><b>Phone:</b> ${phone}<br/><b>Message:</b> ${about}`,
   });
@@ -40,4 +43,11 @@ app.post('/send-email', async (req, res) => {
   res.json({ message: 'Email sent' });
 });
 
-module.exports.handler = app;
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
+// app.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });
+
+// module.exports.handler = app;
