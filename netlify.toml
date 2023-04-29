@@ -1,0 +1,9 @@
+[build]
+  command = "node index.js"
+  functions = "functions"
+
+
+  [[headers]]
+for = "/*"
+[headers.values]
+Access-Control-Allow-Origin = "*"
