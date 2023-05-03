@@ -16,9 +16,9 @@ app.use(cors({
 }));
 
 app.post('/send-email', async (req, res) => {
-  // res.header("Access-Control-Allow-Origin", '*');
-  // res.header("Access-Control-Allow-Methods", "POST");
-  // res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Origin", '*');
+  res.header("Access-Control-Allow-Methods", "POST");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
   
 
   const { firstName, lastName, email, phone, subject, about } = req.body;
